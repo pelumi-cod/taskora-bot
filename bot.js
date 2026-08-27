@@ -8,7 +8,7 @@ const https = require('https');
 const client = new Client({
     authStrategy: new LocalAuth(),
     puppeteer: {
-        executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
         headless: true,
         args: [
             '--no-sandbox',
@@ -74,7 +74,6 @@ client.on('message', async (message) => {
             await message.reply("Downloading media, please wait...");
 
             try {
-per
                 const media = await downloadWithTimeout(message, 15000);
 
                 if (media && media.data) {
